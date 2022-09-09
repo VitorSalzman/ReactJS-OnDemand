@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import { useState, FormEvent, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
@@ -11,7 +11,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
-import MenuItem from '@material-ui/core/MenuItem';
+import MenuItem from "@material-ui/core/MenuItem";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -22,11 +22,10 @@ import barrinhaService from "../../services/barrinhaState";
 import styled from "@emotion/styled";
 import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import { SiGoogleclassroom } from "react-icons/si";
-import Switch from '@material-ui/core/Switch';
+import Switch from "@material-ui/core/Switch";
 import { makeStyles } from "@material-ui/core/styles";
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -57,7 +56,7 @@ function CadastroProject() {
   const history = useHistory();
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
- 
+
   const [collapsed, setCollapsed] = useState(true);
 
   const mudarswitch = () => {
@@ -68,7 +67,8 @@ function CadastroProject() {
     e.preventDefault();
 
     // pegar a hora atual
-    const time = new Date();
+    {
+      /*const time = new Date();
     const data = {
       laboratory_name,
       time,
@@ -93,10 +93,9 @@ function CadastroProject() {
       // CASO ERRO
       .catch(() => {
         alert("Serviço já existente");
-      });
-    };
-
-
+      });*/
+    }
+  };
 
   return (
     // importante, sempre retornar um componente
@@ -108,12 +107,14 @@ function CadastroProject() {
       <Container_animate>
         <AnimatePresence>
           <form className={classes.form} noValidate>
-            <Grid style={{ border: "solid" }}
+            <Grid
+              style={{ border: "solid" }}
               container
               spacing={0}
               direction="row"
               alignItems="flex-start"
-              justify="center">
+              justify="center"
+            >
               <Grid item xs={10} style={{ border: "solid" }}>
                 <CssBaseline />
                 <div className={classes.paper}>
@@ -131,7 +132,7 @@ function CadastroProject() {
                     Informações Básicas
                   </Typography>
                 </div>
-                <TextField
+                {/*<TextField
                   variant="outlined"
                   margin="normal"
                   required
@@ -143,8 +144,8 @@ function CadastroProject() {
                   autoFocus
                   onChange={(e) => setLaboratory_name(e.target.value)}
                   type="text"
-                />
-                <TextField
+                />*/}
+                {/*<TextField
                   variant="outlined"
                   margin="normal"
                   fullWidth
@@ -168,12 +169,12 @@ function CadastroProject() {
                   id="quantidadeVM"
                   label="Quantidade de Máquinas Virtuais"
                   name="quantidadeVM"
-                  autoComplete="Qunatidade de maquinas virtuais"
+                  autoComplete="Quantidade de maquinas virtuais"
                   onChange={(e) => setLaboratory_name(e.target.value)}
                   type="text"
-                />
+                />*/}
 
-                <TextField
+                {/*<TextField
                   variant="outlined"
                   margin="normal"
                   fullWidth
@@ -188,31 +189,40 @@ function CadastroProject() {
                   <MenuItem value="1">Ubuntu 20.04</MenuItem>
                   <MenuItem value="2">Windows XP</MenuItem>
                   <MenuItem value="3">CentOS 8</MenuItem>
-                </TextField>
+                </TextField>*/}
               </Grid>
-              <Grid item xs={4} style={{ border: "solid" }}>
 
-                <div className={classes.paper}>
+              <Grid item xs={4} style={{ border: "solid" }}>
+                {/*<div className={classes.paper}>
                   <Typography component="h1" variant="h5">
                     Configurações de Rede
                   </Typography>
                 </div>
                 <FormGroup>
                   <FormControlLabel
-                    control={<Switch focusVisibleClassName=".Mui-focusVisible" defaultChecked />}
+                    control={
+                      <Switch
+                        focusVisibleClassName=".Mui-focusVisible"
+                        defaultChecked
+                      />
+                    }
                     label="Acesso a Internet"
                     labelPlacement="start"
                   />
-                </FormGroup>
-                <FormGroup>
+                  </FormGroup> */}
+                {/*<FormGroup>
                   <FormControlLabel
-                    control={<Switch focusVisibleClassName=".Mui-focusVisible" 
-                    onChange={(e) => setLaboratory_name(e.target.value)} />}
+                    control={
+                      <Switch
+                        focusVisibleClassName=".Mui-focusVisible"
+                        onChange={(e) => setLaboratory_name(e.target.value)}
+                      />
+                    }
                     label="Controle Parental"
                     labelPlacement="start"
                   />
-                 
-                  {/* <div>
+                  */}
+                {/* <div>
                     <button
                       onClick={() => Toggle.toggleShow(!show)}
                     >
@@ -220,8 +230,8 @@ function CadastroProject() {
                     </button>
                     {show && <div>Hi there</div>}
                   </div> */}
-                </FormGroup>
-                <TextField
+                {/* }</FormGroup> */}
+                {/*<TextField
                   variant="outlined"
                   margin="normal"
                   fullWidth
@@ -245,12 +255,12 @@ function CadastroProject() {
                   id="quantidadeVM"
                   label="Quantidade de Máquinas Virtuais"
                   name="quantidadeVM"
-                  autoComplete="Qunatidade de maquinas virtuais"
+                  autoComplete="Quantidade de maquinas virtuais"
                   onChange={(e) => setLaboratory_name(e.target.value)}
                   type="text"
-                />
+                /> */}
 
-                <TextField
+                {/* <TextField
                   variant="outlined"
                   margin="normal"
                   fullWidth
@@ -265,7 +275,7 @@ function CadastroProject() {
                   <MenuItem value="1">Ubuntu 20.04</MenuItem>
                   <MenuItem value="2">Windows XP</MenuItem>
                   <MenuItem value="3">CentOS 8</MenuItem>
-                </TextField>
+                </TextField>*/}
               </Grid>
               <Grid item xs={8}>
                 <Button
@@ -284,8 +294,7 @@ function CadastroProject() {
             <Bloco
               initial={{ marginLeft: 200 }}
               animate={{ marginLeft: collapsed ? 64 : 168 }}
-            >
-            </Bloco>
+            ></Bloco>
           </form>
         </AnimatePresence>
       </Container_animate>
