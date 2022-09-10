@@ -48,7 +48,6 @@ function Projects() {
     token: "269add21e1b01a62f8854b6e2a0e38",
     username: "test10000",
     project: "8bf8529d9c144b04b6a9d9fb87bcd7f7",
-
   };
 
   // useEffect(() => {
@@ -86,7 +85,6 @@ function Projects() {
 
   const [collapsed, setCollapsed] = useState(true);
 
-
   useEffect(() => {
     const subscribe = barrinhaService.onBarrinha().subscribe((state) => {
       if (state) {
@@ -96,15 +94,15 @@ function Projects() {
       }
     });
   });
-  
+
   const [projeto, setProjeto] = useState(0);
 
   // Similar ao componentDidMount e componentDidUpdate:
   useEffect(() => {
     // Atualiza o titulo do documento usando a API do browser
     // document.title = `Você clicou ${count} vezes`;
-    api.get(`/vdi/${projeto}`)
-  })
+    api.get(`/vdi/${projeto}`);
+  });
   return (
     <>
       <SidebarDashboard /> {/* <CssBaseline /> */}
@@ -116,7 +114,9 @@ function Projects() {
       {/* <Grid> */}
       <Container>
         <div>
-          <Button className={clsx(classes.root)}>Laboratórios disponíveis!</Button>
+          <Button className={clsx(classes.root)}>
+            Laboratórios disponíveis!
+          </Button>
         </div>
         <div>
           {/* onChange={setProjetochange(state.value)} value={state.value} */}
@@ -135,7 +135,9 @@ function Projects() {
               initial={{ marginLeft: 200 }}
               animate={{ marginLeft: collapsed ? 64 : 168 }}
             >
-              <a href={d["url"]} target="_blank">{d["nome"]}</a>
+              <a href={d["url"]} target="_blank">
+                {d["nome"]}
+              </a>
             </Bloco>
           ))}
         </AnimatePresence>
@@ -172,5 +174,5 @@ export default Projects;
 //       {/* // style={{
 //       //   display: "flex",
 //       //   alignItems: "center",
-//       //   justifyContent: "center",
+//       //  ffffff justifyContent: "center",
 //       // }}
