@@ -11,6 +11,7 @@ import logo from "../../assets/img/COD_LOGOvs3.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 import {
   createMuiTheme,
   createStyles,
@@ -79,7 +80,7 @@ function Home(): JSX.Element {
                 data-aos="fade-top"
               >
                 <div>
-                  <Button className={clsx(classes.root)}>Laboratórios disponíveis!</Button>
+                  <Link to="/select_image"> Laboratórios disponíveis! </Link>
                 </div>
               </Grid>
             </Grid>
