@@ -13,6 +13,7 @@ import Pagina_de_Teste from "./pages/pagina_de_teste";
 import VDI from "./pages/vdi";
 import Contato from "./pages/contato";
 import Info from "./pages/info";
+import Laboratory from "./pages/laboratory";
 import { CookiesProvider } from "react-cookie";
 
 // DEFININDO AS ROTAS
@@ -37,6 +38,7 @@ const Rotas = () => {
         <Route component={VDI} path="/vdi" exact />
         <Route component={Contato} path="/contato" exact />
         <Route component={Info} path="/info" exact />
+        <Route component={Laboratory} path="/laboratory" exact />
       </BrowserRouter>
     </CookiesProvider>
   );
