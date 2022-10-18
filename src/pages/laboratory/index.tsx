@@ -179,8 +179,9 @@ function Laboratory() {
 
     // POST QUANDO MINHA API ESTIVER ONLINE
     // ROTA PARA CRIAÇÃO DE USUÁRIO
-    api
-      .post("/beta/laboratory", values)
+    const response = await api
+      //.post("/beta/laboratory", values)
+      .post("/laboratory/", values)
       // depois que rodar o post, roda o then
       // CASO SUCESSO
       .then(() => {
