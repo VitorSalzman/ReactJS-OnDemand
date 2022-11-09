@@ -26,7 +26,7 @@ const Rotas = () => {
         {/* adicionar as rotas futuramente. exemplo abaixo*/}
 
         <Route component={List_image} path="/select_image" exact />
-        <Route component={CadastroProject} path="/create_project" exact />
+        <Route component={CadastroProject} path="/create_laboratory" exact />
         <Route component={Projects} path="/projects" exact />
         <Route component={Equip} path="/equip" exact />
         <Route component={Home} path="/" exact />
