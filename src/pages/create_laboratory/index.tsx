@@ -113,14 +113,14 @@ function CadastroProject() {
   const time = new Date();
 
   const [checked, setChecked] = React.useState(true);
-
-  const [nome, setNome] = React.useState("");
+  const [name, setNome] = React.useState("");
+  const [classroom, setClassroom] = React.useState("");
   const [vm, setVms] = React.useState("");
   const [access_network, setAccess] = React.useState(true);
   const [values, setValues] = React.useState<State>({
-    name: "labteste",
+    name: name,
     user_owner: "vitor",
-    classroom: "SI",
+    classroom: classroom,
     instances: 3,
     image: "tiny_desktop_vnfd",
     description: "laboratorio de sistemas de informacao",
@@ -133,7 +133,7 @@ function CadastroProject() {
     ports_allow: "5060",
     ports_deny: "5070",
     networkfunctions: {
-      vnf1: { configs: "TEXTO JSON", images: "squid_vnfd", order: 1 },
+      vnf1: { configs: "TEXTO JSON", image: "squid_vnfd", order: 1 },
     },
   });
 
@@ -178,7 +178,7 @@ function CadastroProject() {
 
   const enviar = async (e: FormEvent) => {
     e.preventDefault();
-    const dados = { values };
+    const dados = values;
 
     //const selecao = await pool("professor").select("*").where("id", "=", 2);
     //const query = await pool("professor").insert(dados).returning("*");
@@ -192,7 +192,9 @@ function CadastroProject() {
     // ROTA PARA CRIAÇÃO DE USUÁRIO
     const response = await api
       //.post("/beta/laboratory", values)
-      .post("/create_laboratory", JSON.stringify(dados)
+      .post("/create_laboratory", JSON.stringify(dados), {
+        headers: { "Content-Type": "application/json" },
+      })
       // depois que rodar o post, roda o then
       // CASO SUCESSO
       .then(() => {
@@ -204,7 +206,7 @@ function CadastroProject() {
       .catch(() => {
         alert("erro na criação");
       });
-    console.log(values);
+    console.log(response);
   };
   return (
     // importante, sempre retornar um componente
@@ -245,6 +247,20 @@ function CadastroProject() {
             margin="normal"
             required
             fullWidth
+            id="nome"
+            label="Turma"
+            name="email"
+            autoComplete="Turma"
+            autoFocus
+            onChange={(e) => setClassroom(e.target.value)}
+            type="text"
+          />
+
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
             id="nvms"
             label="Quantidade de máquinas virtuais"
             name="email"
@@ -275,6 +291,7 @@ function CadastroProject() {
           Configuraçõs de Rede
         </Typography>
       </div>
+
       <Container component="main" maxWidth="xs">
         <CssBaseline />
 
