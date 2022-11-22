@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FormEvent } from "react";
 import logo from "../../assets/logo.svg";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import githubsvg from "../../assets/img/github.svg";
 import googlesvg from "../../assets/img/google.svg";
 
@@ -20,6 +20,7 @@ import Container from "@material-ui/core/Container";
 import Footer from "../../components/footer/footer";
 import { FiGithub, FiTwitter, FiInstagram } from "react-icons/fi";
 import { Navbartop } from "../../components/navbartop/navbartest";
+import { useHistory } from "react-router-dom";
 
 // PAGINA DE LOGIN
 
@@ -45,6 +46,15 @@ const UseStyles = makeStyles((theme) => ({
 
 function login() {
   const classes = UseStyles();
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const history = useHistory();
+
+  const Redirection = async (e: FormEvent) => {
+    e.preventDefault();
+    history.push("/dashboard");
+    <Redirect to="/localhost:3000/dashboard" />;
+  };
 
   return (
     <>
@@ -92,6 +102,9 @@ function login() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              // onCLinc chama a função enviar criada la em cima
+
+              onClick={Redirection}
             >
               Login
             </Button>

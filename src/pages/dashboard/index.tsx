@@ -5,6 +5,13 @@ import SidebarDashboard from "../../components/sidebar";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import barrinhaService from "../../services/barrinhaState";
+//import Container from "@material-ui/core/Container";
+import styles from "./styles.module.css";
+import { Link } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import LabCard from "../laboratorios/index";
+import CadastroProject from "../create_laboratory/index";
+import { Navbartop } from "../../components/navbartop/navbartest";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Dashboard() {
   const classes = useStyles();
+  const [labs, setLabs] = useState([]);
   const [collapsed, setCollapsed] = useState(true);
 
   useEffect(() => {
@@ -36,15 +44,33 @@ function Dashboard() {
   return (
     <>
       {/* <CssBaseline /> */}
-      <SidebarDashboard />
-      {/* <Navbartop /> */}
+      {/*<SidebarDashboard />*/}
+      <Navbartop />
       {/* <Footer /> */}
-      <Content
+      {/*<Content
         initial={{ marginLeft: 200 }}
         animate={{ marginLeft: collapsed ? 64 : 168 }}
       >
-        <h1>Placeholder</h1>
-      </Content>
+        <div className={styles.placeholder_color}>
+          <h1>Meus laboratórios</h1>
+  </div>
+      </Content>*/}
+      <div className={styles.project_container}>
+        <div className={styles.create_header}>
+          <Link className={styles.botton} to="/create_laboratory">
+            <button type="button">Criar laboratório</button>
+          </Link>
+        </div>
+        <div>
+          <LabCard />
+          <p>
+            <h1>
+              Bem vindo ao <span> Lab On Demand</span>, Vitor! Comece a
+              gerenciar os seus projetos agora mesmo!
+            </h1>
+          </p>
+        </div>
+      </div>
     </>
   );
 }

@@ -1,7 +1,6 @@
-import React, { useState, FormEvent } from "react";
+import React, { useState, FormEvent, ChangeEvent } from "react";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
-import "./style.css";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -42,6 +41,7 @@ import { Navbartop } from "../../components/navbartop/navbartest";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { MenuItem } from "react-pro-sidebar";
+import styles from "./styles.module.css";
 
 // Componente sempre com letra maiúscula--
 const UseStyles = makeStyles((theme) => ({
@@ -81,6 +81,13 @@ const UseStyles = makeStyles((theme) => ({
     height: "150%",
     marginTop: theme.spacing(3),
   },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
 }));
 
 interface State {
@@ -116,20 +123,22 @@ function CadastroProject() {
   const [name, setNome] = React.useState("");
   const [classroom, setClassroom] = React.useState("");
   const [vm, setVms] = React.useState("");
+  const [description, setDescription] = React.useState("");
   const [access_network, setAccess] = React.useState(true);
+  const [selectValue, setSelectValue] = useState("");
   const [values, setValues] = React.useState<State>({
-    name: name,
+    name: "Lab_Inteligencia_Artificial",
     user_owner: "vitor",
-    classroom: classroom,
-    instances: 3,
+    classroom: "Sistemas de Informação",
+    instances: 5,
     image: "tiny_desktop_vnfd",
-    description: "laboratorio de sistemas de informacao",
+    description: "Laboratório dedicado a prática de IA",
     internetaccess: true,
     creation_date: "1655773901",
     removal_date: "1663045921",
     vnf: "image: 'tiny_vnfd', order: 0, configs: 'texto json'",
     sites_allow: "google.com",
-    sites_deny: "globo.com",
+    sites_deny: "facebook.com",
     ports_allow: "5060",
     ports_deny: "5070",
     networkfunctions: {
@@ -152,11 +161,15 @@ function CadastroProject() {
     },
   ];
 
-  const handleChange =
-    (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
-      setValues({ ...values, [prop]: event.target.value });
-      //setChecked(event.target.checked);
-    };
+  //const handleChange =
+  // (prop: keyof State) => (event: React.ChangeEvent<HTMLInputElement>) => {
+  // setValues({ ...values, [prop]: event.target.value });
+  //setChecked(event.target.checked);
+  //};
+
+  const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
+    setSelectValue(event.target.value as string);
+  };
 
   //const handleClickShowPassword = () => {
   //setValues({ ...values, showPassword: !values.showPassword });
@@ -215,63 +228,101 @@ function CadastroProject() {
 
     <>
       <Navbartop />
+      <div className={styles.create_lab}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
 
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <Assignment />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Informações de Laboratório
+            </Typography>
+          </div>
 
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <Assignment />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Informações de Laboratório
-          </Typography>
-        </div>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="nome"
-            label="Nome do laboratório"
-            name="email"
-            autoComplete="Nome do laboratório"
-            autoFocus
-            onChange={(e) => setNome(e.target.value)}
-            type="text"
-          />
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="nome"
+              label="Nome do laboratório"
+              name="email"
+              autoComplete="Nome do laboratório"
+              autoFocus
+              onChange={(e) => setNome(e.target.value)}
+              type="text"
+            />
 
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="nome"
-            label="Turma"
-            name="email"
-            autoComplete="Turma"
-            autoFocus
-            onChange={(e) => setClassroom(e.target.value)}
-            type="text"
-          />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="nome"
+              label="Turma"
+              name="email"
+              autoComplete="Turma"
+              autoFocus
+              onChange={(e) => setClassroom(e.target.value)}
+              type="text"
+            />
 
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="nvms"
-            label="Quantidade de máquinas virtuais"
-            name="email"
-            autoComplete="Quantidade de máquinas virtuais"
-            autoFocus
-            onChange={(e) => setVms(e.target.value)}
-            type="text"
-          />
-        </form>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="vms"
+              label="Quantidade de máquinas virtuais"
+              name="email"
+              autoComplete="Quantidade de máquinas virtuais"
+              autoFocus
+              onChange={(e) => setVms(e.target.value)}
+              type="text"
+            />
 
-        {/* <InputGroup className="mb-3">
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="description"
+              label="Descrição"
+              name="email"
+              autoComplete="Descrição"
+              autoFocus
+              onChange={(e) => setDescription(e.target.value)}
+              type="text"
+            />
+
+            <div>
+              <FormControl variant="outlined" className={classes.formControl}>
+                <InputLabel id="demo-simple-select-outlined-label">
+                  Imagens
+                </InputLabel>
+                <Select
+                  labelId="demo-simple-select-outlined-label"
+                  id="demo-simple-select-outlined"
+                  value={selectValue}
+                  onChange={handleChange}
+                  label="Imagens"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {options.map((option) => (
+                    <MenuItem value={option.value}> {option.label} </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+            <div>{selectValue}</div>
+          </form>
+
+          {/* <InputGroup className="mb-3">
           <InputGroup.Text id="basic-addon1"></InputGroup.Text>
           <Form.Control
             placeholder="Máquinas virtuais"
@@ -281,172 +332,167 @@ function CadastroProject() {
             onChange={handleChange("vms")}
           />
         </InputGroup>*/}
-      </Container>
-
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <Assignment />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Configuraçõs de Rede
-        </Typography>
+        </Container>
       </div>
+      <div className={styles.create_lab_config}>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <Assignment />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Configuraçõs de Rede
+          </Typography>
+        </div>
 
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
 
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={checked}
-                onChange={(internetaccess) =>
-                  setChecked(internetaccess.target.checked)
-                }
-                inputProps={{ "aria-label": "controlled" }}
-              />
-            }
-            label="Acesso à internet"
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  focusVisibleClassName=".Mui-focusVisible"
+                  defaultChecked
+                />
+              }
+              label="Acesso a Internet"
+              labelPlacement="start"
+            />
+          </FormGroup>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  focusVisibleClassName=".Mui-focusVisible"
+                  defaultChecked
+                />
+              }
+              label="Controle Parental"
+              labelPlacement="start"
+            />
+          </FormGroup>
+
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="sites_allow"
+            label="IP/URL"
+            name="email"
+            autoComplete="IP/URL"
+            autoFocus
+            onChange={(e) => setVms(e.target.value)}
+            type="text"
           />
-        </FormGroup>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                onChange={(access_network) =>
-                  setChecked(access_network.target.checked)
-                }
-                focusVisibleClassName=".Mui-focusVisible"
-                defaultChecked
-              />
-            }
-            label="Acesso a Internet"
-            labelPlacement="start"
-          />
-        </FormGroup>
 
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={checked}
-                onChange={handleChange("internetaccess")}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-            }
-            label="Controle Parental"
-          />
-        </FormGroup>
+          <TableContainer component={Paper}>
+            <Table
+              sx={{ minWidth: 300 }}
+              size="small"
+              aria-label="a dense table"
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell>Regra</TableCell>
+                  <TableCell align="left">Liberar</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {values.ports_deny}
+                  </TableCell>
+                  <TableCell align="right">
+                    {
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={checked}
+                              //onChange={handleChange("internetaccess")}
+                              inputProps={{ "aria-label": "controlled" }}
+                            />
+                          }
+                          label=""
+                        />
+                      </FormGroup>
+                    }
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
 
-        <InputGroup className="mb-3">
-          <InputGroup.Text id="basic-addon1"></InputGroup.Text>
-          <Form.Control
-            placeholder="IP/URL"
-            aria-label="Máquinas virtuais"
-            aria-describedby="basic-addon1"
-            value={values.ports_allow}
-            onChange={handleChange("ports_allow")}
-          />
-        </InputGroup>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={checked}
+                  //onChange={handleChange("sites_allow")}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              }
+              label="Firewall"
+            />
+          </FormGroup>
 
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 300 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Regra</TableCell>
-                <TableCell align="left">Liberar</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {values.ports_deny}
-                </TableCell>
-                <TableCell align="right">
-                  {
-                    <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Switch
-                            checked={checked}
-                            onChange={handleChange("internetaccess")}
-                            inputProps={{ "aria-label": "controlled" }}
-                          />
-                        }
-                        label=""
-                      />
-                    </FormGroup>
-                  }
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+          <TableContainer component={Paper}>
+            <Table
+              sx={{ minWidth: 300 }}
+              size="small"
+              aria-label="a dense table"
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell>Regra</TableCell>
+                  <TableCell align="left">Liberar</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {values.ports_deny}
+                  </TableCell>
+                  <TableCell align="right">
+                    {
+                      <FormGroup>
+                        <FormControlLabel
+                          control={
+                            <Switch
+                              checked={checked}
+                              //onChange={handleChange("sites_deny")}
+                              inputProps={{ "aria-label": "controlled" }}
+                            />
+                          }
+                          label=""
+                        />
+                      </FormGroup>
+                    }
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
 
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={checked}
-                onChange={handleChange("sites_allow")}
-                inputProps={{ "aria-label": "controlled" }}
-              />
-            }
-            label="Firewall"
-          />
-        </FormGroup>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            // onCLinc chama a função enviar criada la em cima
 
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 300 }} size="small" aria-label="a dense table">
-            <TableHead>
-              <TableRow>
-                <TableCell>Regra</TableCell>
-                <TableCell align="left">Liberar</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {values.ports_deny}
-                </TableCell>
-                <TableCell align="right">
-                  {
-                    <FormGroup>
-                      <FormControlLabel
-                        control={
-                          <Switch
-                            checked={checked}
-                            onChange={handleChange("sites_deny")}
-                            inputProps={{ "aria-label": "controlled" }}
-                          />
-                        }
-                        label=""
-                      />
-                    </FormGroup>
-                  }
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          // onCLinc chama a função enviar criada la em cima
-
-          onClick={enviar}
-        >
-          Cadastrar
-        </Button>
-      </Container>
+            onClick={enviar}
+          >
+            Cadastrar
+          </Button>
+        </Container>
+      </div>
     </>
   );
 }

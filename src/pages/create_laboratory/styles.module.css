@@ -1,0 +1,30 @@
+.create_lab {
+  position: sticky;
+  top: 0;
+  padding: 1em;
+  border: 1px solid #7a7a7a;
+  border-radius: 5px;
+  width: 40%;
+  margin: 0.5%;
+  display: inline-block;
+  align-content: center;
+  text-align: top;
+}
+
+.create_lab_config {
+  float: right;
+  padding: 1em;
+  border: 1px solid #7a7a7a;
+  border-radius: 5px;
+  width: 50%;
+  margin: 0.5%;
+  display: inline-block;
+  align-content: center;
+}
+
+.blocks_top {
+  top: 0;
+  height: 1px;
+  padding: 0em;
+  align-content: center;
+}

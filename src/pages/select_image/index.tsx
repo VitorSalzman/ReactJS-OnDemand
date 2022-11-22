@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function List_image() {
   const classes = useStyles();
   const [selectValue, setSelectValue] = useState("");
-  const handleChange = (event: ChangeEvent<{ value: unknown }>) => {
+  const handleChangeImage = (event: ChangeEvent<{ value: unknown }>) => {
     setSelectValue(event.target.value as string);
   };
 
@@ -52,7 +52,7 @@ export default function List_image() {
             labelId="demo-simple-select-outlined-label"
             id="demo-simple-select-outlined"
             value={selectValue}
-            onChange={handleChange}
+            onChange={handleChangeImage}
             label="Imagens"
           >
             <MenuItem value="">
