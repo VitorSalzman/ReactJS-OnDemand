@@ -1,0 +1,33 @@
+.project_container {
+  padding: 2em;
+  align-content: center;
+}
+
+.create_header {
+  display: flex;
+  justify-content: space-between;
+  align-content: right;
+  margin-bottom: 2em;
+  max-width: 50%;
+  margin: auto;
+}
+
+.botton {
+  color: green;
+  border-bottom: 1px solid#000;
+}
+
+.placeholder_color {
+  font-weight: bold;
+  color: white;
+}
+.title_container {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
