@@ -29,6 +29,7 @@ import Input from "@material-ui/core/Input";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 // PAGINA DE AUTTENTICAÇÃO DO SERVIÇO
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import { BsPencil, BsFillTrashFill } from "react-icons/bs";
 import {
   FormControlLabel,
   FormGroup,
@@ -42,6 +43,7 @@ import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import { MenuItem } from "react-pro-sidebar";
 import styles from "./styles.module.css";
+import Link from "@mui/material/Link";
 
 // Componente sempre com letra maiúscula--
 const UseStyles = makeStyles((theme) => ({
@@ -127,17 +129,18 @@ function CadastroProject() {
   const [access_network, setAccess] = React.useState(true);
   const [selectValue, setSelectValue] = useState("");
   const [values, setValues] = React.useState<State>({
-    name: "Lab_Inteligencia_Artificial",
+    name: "Lab_Banco_de_dados_2",
     user_owner: "vitor",
     classroom: "Sistemas de Informação",
     instances: 5,
     image: "tiny_desktop_vnfd",
-    description: "Laboratório dedicado a prática de IA",
+    description:
+      "Laboratório dedicado a prática de Banco de Dados 2, com uso do MySQL WorkBench",
     internetaccess: true,
     creation_date: "1655773901",
     removal_date: "1663045921",
     vnf: "image: 'tiny_vnfd', order: 0, configs: 'texto json'",
-    sites_allow: "google.com",
+    sites_allow: "w3school.com",
     sites_deny: "facebook.com",
     ports_allow: "5060",
     ports_deny: "5070",
@@ -372,19 +375,30 @@ function CadastroProject() {
             />
           </FormGroup>
 
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="sites_allow"
-            label="IP/URL"
-            name="email"
-            autoComplete="IP/URL"
-            autoFocus
-            onChange={(e) => setVms(e.target.value)}
-            type="text"
-          />
+          <FormControl variant="outlined" className={classes.formControl}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="sites_allow"
+              label="IP/URL"
+              name="email"
+              autoComplete="IP/URL"
+              autoFocus
+              onChange={(e) => setVms(e.target.value)}
+              type="text"
+            />
+          </FormControl>
+          <Button
+            style={{ height: 25, marginTop: 50, marginLeft: 30 }}
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Adicionar
+          </Button>
 
           <TableContainer component={Paper}>
             <Table
@@ -396,6 +410,8 @@ function CadastroProject() {
                 <TableRow>
                   <TableCell>Regra</TableCell>
                   <TableCell align="left">Liberar</TableCell>
+                  <TableCell align="left">Editar</TableCell>
+                  <TableCell align="left">Remover</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -403,7 +419,7 @@ function CadastroProject() {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {values.ports_deny}
+                    {values.sites_allow}
                   </TableCell>
                   <TableCell align="right">
                     {
@@ -421,6 +437,13 @@ function CadastroProject() {
                       </FormGroup>
                     }
                   </TableCell>
+                  <TableCell>
+                    {" "}
+                    <BsPencil />{" "}
+                  </TableCell>
+                  <TableCell>
+                    <BsFillTrashFill />{" "}
+                  </TableCell>
                 </TableRow>
               </TableBody>
             </Table>
@@ -430,14 +453,38 @@ function CadastroProject() {
             <FormControlLabel
               control={
                 <Switch
-                  checked={checked}
-                  //onChange={handleChange("sites_allow")}
-                  inputProps={{ "aria-label": "controlled" }}
+                  focusVisibleClassName=".Mui-focusVisible"
+                  defaultChecked
                 />
               }
               label="Firewall"
+              labelPlacement="start"
             />
           </FormGroup>
+
+          <FormControl variant="outlined" className={classes.formControl}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              id="sites_allow"
+              label="Porta"
+              name="email"
+              autoComplete="Porta"
+              autoFocus
+              onChange={(e) => setVms(e.target.value)}
+              type="text"
+            />
+          </FormControl>
+          <Button
+            style={{ height: 25, marginTop: 50, marginLeft: 30 }}
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Adicionar
+          </Button>
 
           <TableContainer component={Paper}>
             <Table
@@ -449,6 +496,8 @@ function CadastroProject() {
                 <TableRow>
                   <TableCell>Regra</TableCell>
                   <TableCell align="left">Liberar</TableCell>
+                  <TableCell align="left">Editar</TableCell>
+                  <TableCell align="left">Remover</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -473,6 +522,13 @@ function CadastroProject() {
                         />
                       </FormGroup>
                     }
+                  </TableCell>
+                  <TableCell>
+                    {" "}
+                    <BsPencil />{" "}
+                  </TableCell>
+                  <TableCell>
+                    <BsFillTrashFill />{" "}
                   </TableCell>
                 </TableRow>
               </TableBody>
